@@ -1,0 +1,176 @@
+<div class="layout" *ngIf="dataUser.length > 0">
+
+    <!-- Navbar -->
+    <app-navbar></app-navbar>
+    <!-- End Navbar -->
+
+    <!-- Sidebar -->
+    <app-sidebar
+        [dataUser]="dataUser"
+        [identify]="identify"
+        (getUser)="_getItem($event)"
+    ></app-sidebar>
+    <!-- End Sidebar -->
+
+    <!-- Main Content -->
+    <div class="main main-visible" data-mobile-height="">
+
+        <div id="chat-1" class="chat dropzone-form-js">
+
+            <div class="chat-body">
+
+                <div class="chat-header border-bottom py-4 py-lg-6 px-lg-8">
+                    <div class="container-xxl">
+
+                        <div class="row align-items-center">
+
+                            <div class="col-3 d-xl-none">
+                                <ul class="list-inline mb-0">
+                                    <li class="list-inline-item">
+                                        <a class="text-muted px-0" data-chat="open">
+                                            <i class="icon-md fe-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="col-6 col-xl-6">
+                                <div class="media text-center text-xl-left">
+                                    <div class="avatar avatar-sm d-none d-xl-inline-block mr-5" *ngIf="user.image">
+                                        <img src="{{ IMAGE + 'user/' + user.image }}" class="avatar-img" alt="">
+                                    </div>
+
+                                    <div class="media-body align-self-center text-truncate"
+                                        style="align-items: center;">
+                                        <h6 class="text-truncate mb-n1">{{user.name}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="collapse border-bottom px-lg-8" id="chat-1-search">
+                    <div class="container-xxl py-4 py-lg-6">
+
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-lg" placeholder="Search this chat"
+                                aria-label="Search this chat">
+
+                            <div class="input-group-append">
+                                <button class="btn btn-lg btn-ico btn-secondary btn-minimal" type="submit">
+                                    <i class="fe-search"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="chat-content px-lg-8" #scroll>
+                    <div class="container-xxl py-6 py-lg-10">
+
+                        <div *ngFor="let m of messages">
+
+                            <div *ngIf="identify != m.from" class="message pt-3">
+                                <a class="avatar avatar-sm mr-4 mr-lg-5" href="#"
+                                    data-chat-sidebar-toggle="#chat-1-user-profile">
+                                    <img class="avatar-img" src="{{IMAGE + 'user/' + user.image}}" alt="">
+                                </a>
+
+                                <div class="message-body">
+                                    <div class="message-row">
+                                        <div class="d-flex align-items-center">
+                                            <div class="message-content bg-light">
+                                                <h6 class="mb-2">{{user.name}}</h6>
+                                                <div>{{m.message}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="identify === m.from" class="message message-right pt-3">
+                                <div class="avatar avatar-sm ml-4 ml-lg-5 d-none d-lg-block">
+                                    <img *ngIf="imageProfile" class="avatar-img" src="{{IMAGE + 'user/' + imageProfile }}" alt="">
+                                </div>
+                                <div class="message-body">
+
+                                    <div class="message-row">
+                                        <div class="d-flex align-items-center justify-content-end">
+                                            <div class="message-content bg-primary text-white">
+                                                <div>{{m.message}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="end-of-chat"></div>
+                </div>
+
+                <div class="chat-files hide-scrollbar px-lg-8">
+                    <div class="container-xxl">
+                        <div class="dropzone-previews-js form-row py-4"></div>
+                    </div>
+                </div>
+
+                <div class="chat-footer border-top py-4 py-lg-6 px-lg-8">
+                    <div class="container-xxl">
+
+                        <form id="chat-id-1-form" action="assets/php/upload.php" data-emoji-form="">
+                            <div class="form-row align-items-center">
+                                <div class="col">
+                                    <div class="input-group">
+
+                                        <textarea id="chat-id-1-input" class="form-control bg-transparent border-0"
+                                            placeholder="Escribe tu mensaje..." rows="1" data-emoji-input=""
+                                            [(ngModel)]="message.message"
+                                            [ngModelOptions]="{standalone: true}"
+                                            data-autosize="true"></textarea>
+
+                                        <div class="input-group-append">
+                                            <button
+                                                class="btn btn-ico btn-secondary btn-minimal bg-transparent border-0"
+                                                type="button" data-emoji-btn="">
+                                                <img src="" data-inject-svg="" alt="">
+                                            </button>
+                                        </div>
+
+                                        <div class="input-group-append">
+                                            <button id="chat-upload-btn-1"
+                                                class="btn btn-ico btn-secondary btn-minimal bg-transparent border-0 dropzone-button-js"
+                                                type="button">
+                                                <img src="" data-inject-svg="" alt="">
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-auto">
+                                    <button class="btn btn-ico btn-primary rounded-circle" type="button" (click)="_send()">
+                                        <span class="fe-send"></span>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+                
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>

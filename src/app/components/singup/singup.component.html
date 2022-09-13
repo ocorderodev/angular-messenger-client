@@ -1,0 +1,61 @@
+<div class="layout">
+
+    <div class="container d-flex flex-column">
+        <div class="row align-items-center justify-content-center no-gutters min-vh-100">
+
+            <div class="col-12 col-md-5 col-lg-4 py-8 py-md-11">
+
+                <h1 class="font-bold text-center">Sign up</h1>
+
+                <p class="text-center mb-6">
+                    Register and chat with your friends
+                </p>
+
+                <form class="mb-6">
+
+                    <div class="form-group">
+                        <label for="text" class="sr-only">Name</label>
+                        <input type="text" class="form-control form-control-lg" placeholder="Enter your name"
+                            [(ngModel)]="user.name" [ngModelOptions]="{standalone: true}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="sr-only">Email</label>
+                        <input type="email" class="form-control form-control-lg" placeholder="Enter your email"
+                            [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="sr-only">Password</label>
+                        <input type="password" class="form-control form-control-lg" placeholder="Enter your password"
+                            [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="sr-only">Confirm Password</label>
+                        <input type="password" class="form-control form-control-lg"
+                            placeholder="Enter your confirm of password" [(ngModel)]="confirmPassword"
+                            [ngModelOptions]="{standalone: true}">
+                    </div>
+
+                    <div *ngIf="state" class="alert alert-{{colors}} text-center alert-dismissible fade show" role="alert">
+                        {{message}}
+                        <button type="button" (click)="state = false" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <button class="btn btn-lg btn-block btn-primary" type="button" (click)="register()">
+                        Register
+                    </button>
+                </form>
+
+                <p class="text-center">
+                    Do you already have an account <a routerLink="/">Sign in</a>.
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+</div>
